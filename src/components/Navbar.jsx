@@ -1,7 +1,8 @@
 import { Mail, Notifications, Pets } from '@mui/icons-material'
-import { AppBar, Toolbar, styled, Typography, InputBase, Badge, Avatar, Box } from '@mui/material'
+import { AppBar, Toolbar, styled, Typography, InputBase, Badge, Avatar, Box, Menu, MenuItem } from '@mui/material'
 import React from 'react'
 
+import { useState } from 'react';
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
@@ -36,6 +37,8 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 
 export const Navbar = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <AppBar position='sticky'>
       <StyledToolbar>
@@ -49,13 +52,39 @@ export const Navbar = () => {
           <Badge badgeContent={4} color="error">
             <Notifications />
           </Badge>
-          <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" sx={{ width: 30, height: 30 }} />
+          <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" 
+          sx={{ width: 30, height: 30 }} 
+          onClick={() => setOpen(true)}
+            />
         </Icon>
         <UserBox>
-          <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" sx={{ width: 30, height: 30 }} />
+          <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" 
+          sx={{ width: 30, height: 30 }} 
+          onClick={() => setOpen(true)}
+          />
           <Typography variant='span'>John</Typography>
         </UserBox>
       </StyledToolbar>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        
+        open={open}
+        onClose={() => setOpen(false)}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem>Profile</MenuItem>
+        <MenuItem>My account</MenuItem>
+        <MenuItem>Logout</MenuItem>
+      </Menu>
+
 
     </AppBar>
   )
